@@ -10,7 +10,7 @@
 
 # Development Environment
 
-  Python==3.8.0
-  Django==4.0.4
+  Python==3.8.0,
+  Django==4.0.4,
   djangorestframework==3.13.1
 

@@ -6,5 +6,6 @@ from dataTest import views
 
 urlpatterns = [
     path('users/', views.user_list),
+    path('users/<int:pk>',views.user_select),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

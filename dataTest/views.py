@@ -19,3 +19,22 @@ def user_list(request):
             serializer.save() # 데이터 저장
             return JsonResponse(serializer.data, status=201) # 정상 응답 201
         return JsonResponse(serializer.errors, status=400) # 모델에 일치하지 않는 데이터일 경우
+
+@csrf_exempt
+def user_select(request, pk):
+    object = Users.objects.get(pk=pk)
+    if request.method == "GET":
+        serializer = userSerializer(object)
+        return JsonResponse(serializer.data,safe =False)
+
+    elif request.method == "PUT":
+        update_data = JSONParser().parse(request)
+        serializer = userSerializer(object, data= update_data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == "DELETE":
+        object.delete()
+        return HttpResponse(status=204)
